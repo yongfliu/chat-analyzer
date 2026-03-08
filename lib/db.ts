@@ -2,10 +2,12 @@ import mongoose from 'mongoose';
 
 // 扩展global类型，添加mongoose属性
 declare global {
-  var mongoose: {
-    conn: any;
-    promise: any;
-  };
+  interface Global {
+    mongoose: {
+      conn: any;
+      promise: any;
+    };
+  }
 }
 
 // 连接到 MongoDB 数据库
@@ -16,10 +18,10 @@ if (!MONGODB_URI) {
 }
 
 // 存储连接对象
-let cached = global.mongoose;
+let cached = (global as any).mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  (global as any).mongoose = cached = { conn: null, promise: null };
 }
 
 async function dbConnect() {
