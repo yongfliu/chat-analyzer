@@ -7,15 +7,25 @@ export async function POST(request: NextRequest) {
     const { content } = body;
 
     if (!content) {
-      return NextResponse.json({ error: 'Content is required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Content is required' },
+        { status: 400 },
+      );
     }
 
     const chat = await Chat.create({ content });
 
-    return NextResponse.json({ id: chat._id, content: chat.content, createdAt: chat.createdAt });
+    return NextResponse.json({
+      id: chat._id,
+      content: chat.content,
+      createdAt: chat.createdAt,
+    });
   } catch (error) {
     console.error('Error creating chat:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
   }
 }
 
@@ -26,6 +36,9 @@ export async function GET() {
     return NextResponse.json(chats);
   } catch (error) {
     console.error('Error getting chats:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
   }
 }

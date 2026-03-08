@@ -24,23 +24,27 @@
 ### 开发环境
 
 1. 克隆仓库
+
    ```bash
    git clone https://github.com/yongfliu/chat-analyzer.git
    cd chat-analyzer
    ```
 
 2. 安装依赖
+
    ```bash
    npm install
    ```
 
 3. 配置环境变量
    创建`.env.local`文件，添加以下内容：
+
    ```bash
    MONGODB_URI=your-mongodb-uri
    ```
 
 4. 启动开发服务器
+
    ```bash
    npm run dev
    ```
