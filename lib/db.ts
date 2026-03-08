@@ -1,15 +1,5 @@
 import mongoose from 'mongoose';
 
-// 扩展global类型，添加mongoose属性
-declare global {
-  interface Global {
-    mongoose: {
-      conn: any;
-      promise: any;
-    };
-  }
-}
-
 // 连接到 MongoDB 数据库
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-analyzer';
 
@@ -17,19 +7,17 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-// 存储连接对象
-let cached = (global as any).mongoose;
-
-if (!cached) {
-  (global as any).mongoose = cached = { conn: null, promise: null };
-}
+// 使用模块级别的变量来存储连接对象，避免使用global
+let cached: { conn: any; promise: any } | null = null;
 
 async function dbConnect() {
-  if (cached.conn) {
+  if (cached) {
     return cached.conn;
   }
 
-  if (!cached.promise) {
+  if (!cached) {
+    cached = { conn: null, promise: null };
+    
     const opts = {
       bufferCommands: false,
     };
