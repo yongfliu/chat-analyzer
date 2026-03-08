@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 
+// 扩展global类型，添加mongoose属性
+declare global {
+  var mongoose: {
+    conn: any;
+    promise: any;
+  };
+}
+
 // 连接到 MongoDB 数据库
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-analyzer';
 
