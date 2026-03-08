@@ -22,11 +22,7 @@ export default function Home() {
         const response = await fetch('/api/chat');
         
         if (!response.ok) {
-          if (response.status === 429) {
-            throw new Error('请求过于频繁，请稍后再试');
-          } else {
-            throw new Error(`服务器错误: ${response.status}`);
-          }
+          throw new Error(`服务器错误: ${response.status}`);
         }
         
         const data = await response.json();
@@ -60,9 +56,7 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        if (response.status === 429) {
-          throw new Error('请求过于频繁，请稍后再试');
-        } else if (response.status === 400) {
+        if (response.status === 400) {
           throw new Error('内容不能为空');
         } else {
           throw new Error(`服务器错误: ${response.status}`);
