@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 小贝壳 - 直接聊天笔记系统
 
-## Getting Started
+小贝壳是一个基于Next.js的直接聊天笔记系统，它可以通过AI技术分析聊天内容并自动整理归纳为笔记。
 
-First, run the development server:
+## 功能特点
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **直接聊天**：用户可以直接与系统聊天，无需上传文件
+- **实时分析**：AI实时分析聊天内容并整理归纳
+- **笔记存储**：自动将聊天记录和分析结果存储到后台
+- **查询功能**：支持查询历史聊天记录和笔记
+- **归纳总结**：支持对聊天记录进行归纳总结
+- **响应式设计**：支持移动端和桌面端
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 技术栈
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **前端**：Next.js + React + TypeScript + Tailwind CSS
+- **后端**：Next.js API Routes + Node.js + Express
+- **数据库**：MongoDB（NoSQL数据库，适合存储非结构化数据）
+- **AI服务**：字节跳动的豆包AI服务
+- **部署**：Vercel（适合Next.js应用的部署）
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 快速开始
 
-## Learn More
+### 开发环境
 
-To learn more about Next.js, take a look at the following resources:
+1. 克隆仓库
+   ```bash
+   git clone https://github.com/yongfliu/chat-analyzer.git
+   cd chat-analyzer
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. 安装依赖
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. 配置环境变量
+   创建`.env.local`文件，添加以下内容：
+   ```bash
+   MONGODB_URI=your-mongodb-uri
+   ```
 
-## Deploy on Vercel
+4. 启动开发服务器
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. 访问应用
+   打开浏览器访问`http://localhost:3000`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 生产部署
+
+1. 配置环境变量
+   在Vercel中配置以下环境变量：
+   - `MONGODB_URI`：MongoDB连接字符串
+
+2. 部署到Vercel
+   使用Vercel CLI部署：
+   ```bash
+   vercel
+   ```
+
+## 使用方法
+
+1. **直接聊天**：在应用中直接输入聊天内容，系统会自动分析并整理为笔记
+2. **查询笔记**：在聊天记录列表中查看和查询历史笔记
+3. **归纳总结**：系统会自动对聊天内容进行归纳总结
+
+## 贡献
+
+1. Fork仓库
+2. 创建分支
+3. 提交变更
+4. 打开Pull Request
+
+## 许可证
+
+MIT License
