@@ -20,16 +20,17 @@ export default function Home() {
       try {
         setLoading(true);
         const response = await fetch('/api/chat');
-        
+
         if (!response.ok) {
           throw new Error(`服务器错误: ${response.status}`);
         }
-        
+
         const data = await response.json();
         setChats(data);
-      } catch (error: any) {
-        console.error('Error fetching chats:', error);
-        setError(error.message || '获取聊天记录失败');
+      } catch (error) {
+        const err = error as Error;
+        console.error('Error fetching chats:', err);
+        setError(err.message || '获取聊天记录失败');
       } finally {
         setLoading(false);
       }
@@ -46,7 +47,7 @@ export default function Home() {
     try {
       setLoading(true);
       setError('');
-      
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -68,9 +69,10 @@ export default function Home() {
       // 更新聊天记录列表
       setChats([data, ...chats]);
       setInput('');
-    } catch (error: any) {
-      console.error('Error creating chat:', error);
-      setError(error.message || '发送失败');
+    } catch (error) {
+      const err = error as Error;
+      console.error('Error creating chat:', err);
+      setError(err.message || '发送失败');
     } finally {
       setLoading(false);
     }
@@ -104,8 +106,8 @@ export default function Home() {
                 className="flex-1 p-2 border border-gray-300 rounded"
                 disabled={loading}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="bg-blue-500 text-white p-2 rounded disabled:opacity-50"
                 disabled={loading}
               >
@@ -120,8 +122,13 @@ export default function Home() {
           ) : (
             <div className="space-y-2">
               {chats.map((chat) => (
-                <div key={chat.id} className="p-2 border border-gray-300 rounded">
-                  <p className="text-sm text-gray-500">{new Date(chat.createdAt).toLocaleString()}</p>
+                <div
+                  key={chat.id}
+                  className="p-2 border border-gray-300 rounded"
+                >
+                  <p className="text-sm text-gray-500">
+                    {new Date(chat.createdAt).toLocaleString()}
+                  </p>
                   <p>{chat.content}</p>
                 </div>
               ))}

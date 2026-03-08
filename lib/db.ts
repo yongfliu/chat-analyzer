@@ -1,14 +1,18 @@
 import mongoose from 'mongoose';
 
 // 连接到 MongoDB 数据库
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-analyzer';
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-analyzer';
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
 // 使用模块级别的变量来存储连接对象，避免使用global
-let cached: { conn: any; promise: any } | null = null;
+let cached: {
+  conn: mongoose.Mongoose | null;
+  promise: Promise<mongoose.Mongoose> | null;
+} | null = null;
 
 async function dbConnect() {
   if (cached) {
@@ -17,7 +21,7 @@ async function dbConnect() {
 
   if (!cached) {
     cached = { conn: null, promise: null };
-    
+
     const opts = {
       bufferCommands: false,
     };
