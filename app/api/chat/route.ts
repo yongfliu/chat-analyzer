@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const chats = await Chat.find().sort({ createdAt: -1 });
+    const chats = await Chat.find();
 
     return NextResponse.json(chats);
   } catch (error) {
